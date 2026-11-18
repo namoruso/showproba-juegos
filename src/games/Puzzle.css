@@ -1,23 +1,80 @@
-.pz-board { --g: clamp(6px, 1vw, 10px); position: relative; aspect-ratio: 3 / 2; width: 100%; margin-inline: auto; }
-@media (min-width: 1024px) and (orientation: landscape) {
-  .pz-board { width: min(100%, 78vh, 900px); }
+.pz-board {
+  --g: clamp(6px, 1vw, 10px);
+  position: relative; aspect-ratio: 3 / 2; width: 100%;
+  max-width: min(100%, 720px); margin-inline: auto;
 }
-.pz-tile, .pz-hole { position: absolute; width: calc((100% - 2 * var(--g)) / 3); height: calc((100% - var(--g)) / 2);
-  left: calc(var(--c) * ((100% - 2 * var(--g)) / 3 + var(--g))); top: calc(var(--r) * ((100% - var(--g)) / 2 + var(--g))); }
-.pz-tile { padding: 0; overflow: hidden; border-radius: var(--radius-md); background: var(--navy-800); border: 0; cursor: pointer;
-  transition: left .18s ease, top .18s ease, border-color .2s; }
-.pz-tile::before { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; border: 1px solid rgba(255,214,0,.2); pointer-events: none; }
+.sp-panel:has(.pz-board) { width: 100%; padding: clamp(8px, 1.5vw, 14px); }
+
+.pz-tile, .pz-hole {
+  position: absolute;
+  width: calc((100% - 2 * var(--g)) / 3);
+  height: calc((100% - var(--g)) / 2);
+  left: calc(var(--c) * ((100% - 2 * var(--g)) / 3 + var(--g)));
+  top: calc(var(--r) * ((100% - var(--g)) / 2 + var(--g)));
+}
+.pz-tile {
+  padding: 0; overflow: hidden; border-radius: var(--radius-md); background: var(--navy-800);
+  border: 0; cursor: pointer; transition: left .18s ease, top .18s ease, border-color .2s;
+}
+.pz-tile::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit;
+  border: 1px solid rgba(255,214,0,.2); pointer-events: none;
+}
 .pz-tile.is-movable::before { border: 2px dashed rgba(255,214,0,.6); }
-.pz-tile.is-ok::after { z-index: 1; content: ""; position: absolute; right: 6px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold-400); box-shadow: 0 0 8px var(--gold-400); }
+.pz-tile.is-ok::after {
+  z-index: 1; content: ""; position: absolute; right: 6px; top: 6px; width: 10px; height: 10px;
+  border-radius: 50%; background: var(--gold-400); box-shadow: 0 0 8px var(--gold-400);
+}
 .pz-hole { border-radius: var(--radius-md); border: 2px dashed var(--stage-600); }
-/* Imagen completa = tablero entero; cada pieza muestra su recorte. El logo mantiene su proporción. */
-.pz-art { position: absolute; width: calc(300% + 2 * var(--g)); height: calc(200% + var(--g));
-  left: calc(var(--pc) * (-100% - var(--g))); top: calc(var(--pr) * (-100% - var(--g))); display: grid; place-items: center; pointer-events: none; }
-.pz-logo.sp-logo { width: 88%; height: auto; margin: 0; }
-.pz-n { z-index: 1; position: absolute; left: 6px; top: 4px; font: 700 10px var(--font-display); color: rgba(255,255,255,.4); }
+
+/* Tablero virtual 3×2: cada pieza recorta su celda del logo completo */
+.pz-art {
+  position: absolute;
+  width: calc(300% + 2 * var(--g));
+  height: calc(200% + var(--g));
+  left: calc(var(--pc) * (-100% - var(--g)));
+  top: calc(var(--pr) * (-100% - var(--g)));
+  display: grid; place-items: center; pointer-events: none;
+}
+/* Crítico: no heredar height de .sp-logo (rompería el recorte) */
+.pz-logo.sp-logo {
+  width: 88%;
+  height: auto !important;
+  max-height: none;
+  max-width: none;
+  margin: 0;
+  object-fit: contain;
+}
+.pz-n {
+  z-index: 1; position: absolute; left: 6px; top: 4px;
+  font: 700 10px var(--font-display); color: rgba(255,255,255,.4);
+}
 .pz-board.is-solved .pz-tile { box-shadow: var(--glow-soft); }
 .pz-board.is-solved .pz-tile::before { border: 0; }
 .pz-board.is-solved .pz-n, .pz-board.is-solved .pz-tile::after { opacity: 0; }
-.pz-target { display: flex; align-items: center; gap: 12px; margin-top: 14px; font: 500 var(--sp-body)/1.35 var(--font-body); color: var(--ink-muted); }
-.pz-thumb { flex: none; width: clamp(56px, 10vw, 80px); height: clamp(56px, 10vw, 80px); border-radius: 12px; background: var(--navy-800); display: grid; place-items: center; border: 1px solid var(--stage-600); }
-.pz-thumb-logo.sp-logo { width: 72%; height: auto; }
+
+.pz-target {
+  display: flex; align-items: center; gap: 12px; margin-top: 10px; flex: none;
+  font: 500 var(--sp-body)/1.35 var(--font-body); color: var(--ink-muted);
+}
+.pz-thumb {
+  flex: none; width: clamp(52px, 8vw, 72px); height: clamp(52px, 8vw, 72px);
+  border-radius: 12px; background: var(--navy-800); display: grid; place-items: center;
+  border: 1px solid var(--stage-600);
+}
+.pz-thumb-logo.sp-logo {
+  width: 72%; height: auto !important; max-height: none; margin: 0;
+}
+
+@media (min-width: 768px) {
+  .pz-board { max-width: min(100%, 840px); }
+}
+
+@media (min-width: 1024px) and (orientation: landscape) {
+  .pz-board {
+    width: min(100%, calc(var(--sp-play-budget) * 1.5), 880px);
+    max-width: none;
+    max-height: var(--sp-play-budget);
+  }
+  .pz-target { margin-top: 6px; }
+}

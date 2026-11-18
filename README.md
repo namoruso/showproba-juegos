@@ -77,7 +77,7 @@ Para agregar un juego, crea `src/games/MiJuego.jsx` y súmalo a `data/games.js` 
 ## Notas
 
 - **Logo:** `src/assets/showproba-logo-white.png` se recortó de una captura de pantalla. Reemplázalo por el original con el mismo nombre. Siempre se muestra con alto fijo y ancho automático, así que nunca se deforma.
-- **Responsive:** escala fluida en `tokens.css` (`--sp-*`) para logos, tipografía, HUD, botones y anchos de pantalla. Móvil → tablet → iPad Pro → tótem landscape. Aplica a menú, resultados y los 10 juegos.
+- **Responsive:** escala fluida en `tokens.css` (`--sp-*`) para logos, tipografía, HUD y anchos. En desktop landscape, `--sp-play-budget` limita tableros/ruletas para que el CTA no se corte (`100dvh`). Aplica a menú, resultados y los 10 juegos.
 - **Accesibilidad:** respeta `prefers-reduced-motion`, todos los controles son botones con etiqueta y los estados se distinguen sin depender solo del color.
 - **Fuentes:** Unbounded y Outfit vienen de `@fontsource`, sin Google Fonts en tiempo de ejecución, así que también funcionan sin conexión.
 

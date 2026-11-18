@@ -130,26 +130,28 @@
   }
 }
 
-/* Escritorio / tótem landscape: menú ancho; juegos usan más del monitor */
+/* Escritorio / tótem landscape: menú ancho; juegos caben en 100dvh sin cortar el CTA */
 @media (min-width: 1024px) and (orientation: landscape) {
   :root {
     --sp-game-max: min(78vw, 1040px);
     --sp-menu-max: min(96vw, 1360px);
     --sp-pad-x: 36px;
-    --sp-pad-y-top: 12px;
-    --sp-pad-y-bot: 20px;
-    --sp-logo: 48px;
+    --sp-pad-y-top: 10px;
+    --sp-pad-y-bot: 16px;
+    --sp-logo: 44px;
     --sp-logo-lg: 112px;
-    --sp-topbar: 56px;
-    --sp-icon: 48px;
-    --sp-title: 34px;
-    --sp-kicker: 12px;
-    --sp-btn-h: 56px;
-    --sp-btn-fs: 15px;
-    --sp-chip-min: 112px;
-    --sp-chip-b: 26px;
-    --sp-chip-label: 11px;
-    --sp-body: 16px;
+    --sp-topbar: 52px;
+    --sp-icon: 44px;
+    --sp-title: 30px;
+    --sp-kicker: 11px;
+    --sp-btn-h: 52px;
+    --sp-btn-fs: 14px;
+    --sp-chip-min: 100px;
+    --sp-chip-b: 24px;
+    --sp-chip-label: 10px;
+    --sp-body: 15px;
+    /* Alto libre para tablero/ruleta tras topbar + título + HUD + CTA */
+    --sp-play-budget: calc(100dvh - 250px);
   }
 }
 
@@ -157,6 +159,7 @@
   :root {
     --sp-game-max: min(72vw, 1120px);
     --sp-menu-max: min(96vw, 1400px);
+    --sp-play-budget: calc(100dvh - 240px);
   }
 }
 

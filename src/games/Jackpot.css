@@ -1,35 +1,48 @@
 .jp-machine {
-  padding: clamp(12px, 2.5vw, 22px); width: 100%; border-radius: var(--radius-xl);
+  padding: clamp(12px, 2vw, 20px); width: 100%; max-width: min(100%, 560px); margin-inline: auto;
+  border-radius: var(--radius-xl);
   background: linear-gradient(180deg, var(--navy-800), var(--navy-900));
   border: 2px solid var(--gold-500); box-shadow: var(--lift), var(--glow-soft); transition: box-shadow .3s;
+  flex: 0 1 auto; min-height: 0;
 }
 .jp-machine.is-won { box-shadow: var(--lift), var(--glow-gold); }
 .jp-bulbs { display: flex; justify-content: space-between; padding: 0 10px; }
-.jp-bulbs i { width: clamp(8px, 1.2vw, 12px); height: clamp(8px, 1.2vw, 12px); border-radius: 50%; background: var(--gold-300); box-shadow: 0 0 8px var(--gold-400); animation: sp-blink .8s infinite; }
+.jp-bulbs i {
+  width: clamp(8px, 1.2vw, 11px); height: clamp(8px, 1.2vw, 11px); border-radius: 50%;
+  background: var(--gold-300); box-shadow: 0 0 8px var(--gold-400); animation: sp-blink .8s infinite;
+}
 .jp-bulbs i:nth-child(even) { animation-delay: .4s; }
 .jp-machine.is-won .jp-bulbs i { animation-duration: .25s; }
 .jp-sign {
-  text-align: center; margin: 10px 0;
-  font: 800 clamp(20px, 4vw, 32px) var(--font-display); letter-spacing: clamp(4px, 1vw, 10px);
+  text-align: center; margin: 8px 0;
+  font: 800 clamp(18px, 3.5vw, 28px) var(--font-display); letter-spacing: clamp(4px, 1vw, 8px);
   color: var(--gold-400); text-shadow: 0 0 18px rgba(255,193,0,.6);
 }
-.jp-window { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(8px, 1.5vw, 14px); padding: clamp(8px, 1.5vw, 14px); border-radius: var(--radius-md); background: var(--stage-950); margin-bottom: 10px; }
-.jp-reel { display: flex; flex-direction: column; align-items: center; border-radius: 12px; background: linear-gradient(180deg, var(--stage-800), var(--stage-700) 50%, var(--stage-800)); overflow: hidden; transition: box-shadow .2s, background .2s; }
-.jp-reel span { display: grid; place-items: center; height: clamp(58px, 10vw, 88px); color: var(--gold-400); }
-.jp-reel .jp-ghost { opacity: .25; height: clamp(34px, 6vw, 48px); color: var(--ink); }
+.jp-window {
+  position: relative; display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(8px, 1.4vw, 12px); padding: clamp(8px, 1.4vw, 12px);
+  border-radius: var(--radius-md); background: var(--stage-950); margin-bottom: 8px;
+}
+.jp-reel {
+  display: flex; flex-direction: column; align-items: center; border-radius: 12px;
+  background: linear-gradient(180deg, var(--stage-800), var(--stage-700) 50%, var(--stage-800));
+  overflow: hidden; transition: box-shadow .2s, background .2s;
+}
+.jp-reel span { display: grid; place-items: center; height: clamp(52px, 9vw, 80px); color: var(--gold-400); }
+.jp-reel .jp-ghost { opacity: .25; height: clamp(30px, 5vw, 44px); color: var(--ink); }
 .jp-reel.is-spinning span { filter: blur(1.5px); }
 .jp-reel.is-hit { background: var(--gold-tint); box-shadow: inset 0 0 0 2px var(--gold-400); }
 .jp-reel.is-hit .jp-main { color: var(--gold-300); filter: drop-shadow(0 0 10px rgba(255,214,0,.8)); animation: sp-pop .4s; }
 .jp-line { position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--gold-500); opacity: .6; pointer-events: none; }
-.jp-pay { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; margin-top: 16px; font: 500 12px var(--font-body); color: var(--ink-muted); }
+.jp-pay { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; margin-top: 12px; font: 500 12px var(--font-body); color: var(--ink-muted); }
 .jp-pay span { display: inline-flex; align-items: center; gap: 4px; }
 .jp-pay svg { color: var(--gold-500); }
-.jp-msg { text-align: center; margin-top: 16px; animation: sp-pop .5s; }
-.jp-msg strong { display: block; margin-top: 6px; font: 700 clamp(18px, 3vw, 24px) var(--font-display); }
-.jp-miss { text-align: center; margin-top: 12px; font: 600 var(--sp-body) var(--font-body); color: var(--ink-muted); }
+.jp-msg { text-align: center; margin-top: 12px; animation: sp-pop .5s; }
+.jp-msg strong { display: block; margin-top: 6px; font: 700 clamp(16px, 2.8vw, 22px) var(--font-display); }
+.jp-miss { text-align: center; margin-top: 10px; font: 600 var(--sp-body) var(--font-body); color: var(--ink-muted); }
 .jp-pull { min-height: var(--sp-btn-h); font-size: var(--sp-btn-fs); }
 
 @media (min-width: 1024px) and (orientation: landscape) {
-  .jp-machine { max-width: min(100%, 720px); margin-inline: auto; }
-  .jp-reel span { height: clamp(70px, 12vh, 96px); }
+  .jp-machine { max-width: min(100%, 640px); max-height: var(--sp-play-budget); }
+  .jp-reel span { height: clamp(56px, 10vh, 84px); }
 }

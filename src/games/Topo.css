@@ -1,17 +1,18 @@
-.tp-goal { margin-top: -4px; width: 100%; }
+.tp-goal { margin-top: -4px; width: 100%; flex: none; }
 .tp-field {
   position: relative; display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: clamp(12px, 2vw, 18px) clamp(10px, 1.8vw, 16px);
-  padding: clamp(16px, 2.5vw, 24px) clamp(12px, 2vw, 18px) clamp(14px, 2vw, 20px);
+  gap: clamp(10px, 2vw, 16px) clamp(8px, 1.6vw, 14px);
+  padding: clamp(14px, 2.2vw, 20px) clamp(10px, 2vw, 16px) clamp(12px, 2vw, 18px);
   width: 100%; border-radius: var(--radius-lg);
   background:
     radial-gradient(90% 60% at 50% 0%, rgba(255,193,0,.08), transparent 70%),
     linear-gradient(180deg, var(--navy-900), var(--stage-950));
   border: 1px solid var(--stage-600);
+  flex: 1 1 auto; min-height: 0;
 }
 .tp-hole {
   position: relative; aspect-ratio: 1 / 1.05; padding: 0; border: 0; background: none;
-  cursor: pointer; touch-action: manipulation; -webkit-user-select: none; user-select: none;
+  cursor: pointer; touch-action: manipulation; -webkit-user-select: none; user-select: none; min-height: 0;
 }
 .tp-pit {
   position: absolute; left: 6%; right: 6%; bottom: 6%; height: 30%; border-radius: 50%;
@@ -48,7 +49,7 @@
 .tp-bad-spark { stroke: var(--signal-error); stroke-width: 4; stroke-linecap: round; animation: sp-blink .3s infinite; }
 .tp-score {
   position: absolute; left: 50%; top: 0; z-index: 3; translate: -50% 0;
-  font: 800 clamp(18px, 3vw, 28px) var(--font-display); color: var(--gold-400);
+  font: 800 clamp(16px, 2.8vw, 24px) var(--font-display); color: var(--gold-400);
   text-shadow: 0 0 10px rgba(255,193,0,.6); pointer-events: none; animation: tp-float .65s ease-out forwards;
 }
 .tp-score.is-bad { color: var(--signal-error); text-shadow: none; }
@@ -57,7 +58,10 @@
 
 @media (min-width: 1024px) and (orientation: landscape) {
   .tp-field {
-    width: min(100%, 70vh, 780px);
+    width: min(100%, var(--sp-play-budget), 720px);
+    max-height: var(--sp-play-budget);
     margin-inline: auto;
+    grid-template-rows: repeat(3, 1fr);
   }
+  .tp-hole { aspect-ratio: auto; height: 100%; }
 }

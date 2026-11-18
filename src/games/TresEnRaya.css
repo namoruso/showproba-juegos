@@ -1,4 +1,4 @@
-.ttt-players { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 2vw, 16px); margin-bottom: 14px; flex-wrap: wrap; }
+.ttt-players { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 2vw, 16px); margin-bottom: 10px; flex-wrap: wrap; flex: none; }
 .ttt-p {
   display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; border-radius: 99px;
   background: var(--stage-800); border: 1px solid var(--stage-600); transition: border-color .2s, box-shadow .2s;
@@ -10,14 +10,15 @@
 .ttt-p small { display: block; font: 600 10px var(--font-body); letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-muted); }
 .ttt-p strong { font: 800 clamp(16px, 2.5vw, 20px) var(--font-display); }
 .ttt-vs { font: 800 10px var(--font-display); color: var(--ink-muted); letter-spacing: 1.5px; }
-.ttt-status { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 6px 0 14px; font: 600 var(--sp-body)/1.3 var(--font-body); min-height: 22px; }
+.ttt-status { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 4px 0 10px; font: 600 var(--sp-body)/1.3 var(--font-body); min-height: 22px; flex: none; }
 .ttt-status i { width: 8px; height: 8px; border-radius: 50%; background: var(--gold-400); animation: sp-blink 1s infinite; }
 .ttt-status.is-wait { color: var(--ink-muted); }
 .ttt-status.is-win { color: var(--gold-400); }
 .ttt-board {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(10px, 1.8vw, 16px);
-  padding: clamp(12px, 2vw, 18px); width: min(100%, 480px); margin-inline: auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(10px, 1.8vw, 14px);
+  padding: clamp(10px, 2vw, 16px); width: min(100%, 440px); margin-inline: auto;
   border-radius: var(--radius-lg); background: var(--stage-950); border: 1px solid var(--stage-600);
+  flex: 0 1 auto; min-height: 0;
 }
 .ttt-cell {
   aspect-ratio: 1; border-radius: var(--radius-md); background: var(--stage-800); border: 1px solid var(--stage-600);
@@ -32,21 +33,12 @@
 .ttt-cell.is-win.is-O { background: rgba(255,90,95,.1); border: 2px solid var(--signal-error); }
 
 @media (min-width: 768px) {
-  .ttt-board { width: min(100%, 560px); }
+  .ttt-board { width: min(100%, 520px); }
 }
 
-/* Desktop: tablero grande según alto de ventana */
 @media (min-width: 1024px) and (orientation: landscape) {
   .ttt-board {
-    width: min(100%, 58vh, 640px);
-    gap: 14px;
-    padding: 16px;
-    flex: 0 1 auto;
+    width: min(100%, var(--sp-play-budget), 560px);
+    max-height: var(--sp-play-budget);
   }
-  .ttt-players { margin-bottom: 10px; }
-  .ttt-status { margin: 4px 0 10px; }
-}
-
-@media (min-width: 1400px) and (orientation: landscape) {
-  .ttt-board { width: min(100%, 62vh, 720px); }
 }
