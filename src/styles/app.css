@@ -1,48 +1,91 @@
-/* Layout: móvil → tablet → tótem. Anchos y tipografía vienen de tokens (--sp-*). */
-html, body, #root { margin: 0; min-height: 100%; background: var(--stage-900); }
+/* Layout: móvil → tablet → tótem. Safe areas SUMADAS (Safari / iPhone). */
+html {
+  margin: 0;
+  height: 100%;
+  background: var(--stage-900);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body, #root { margin: 0; min-height: 100%; min-height: 100svh; min-height: 100dvh; background: var(--stage-900); }
 body { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
 button { font-family: inherit; color: inherit; }
 :focus-visible { outline: 3px solid var(--gold-400); outline-offset: 3px; }
 
-.sp-app { min-height: 100vh; min-height: 100dvh; width: 100%; background-attachment: fixed; }
+.sp-app {
+  min-height: 100%;
+  min-height: 100svh;
+  min-height: 100dvh;
+  width: 100%;
+  background-attachment: fixed;
+}
 
 .sp-screen {
   position: relative;
   width: 100%;
   max-width: var(--sp-game-max);
-  min-height: 100vh; min-height: 100dvh;
+  /* svh = viewport con barras Safari visibles → el CTA cabe sin scroll inicial */
+  min-height: 100svh;
+  min-height: 100dvh;
   margin: 0 auto;
-  display: flex; flex-direction: column;
-  padding:
-    max(var(--sp-pad-y-top), env(safe-area-inset-top))
-    max(var(--sp-pad-x), env(safe-area-inset-right))
-    max(var(--sp-pad-y-bot), env(safe-area-inset-bottom))
-    max(var(--sp-pad-x), env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  /* IMPORTANTE: sumar safe-area, no usar max() — si no, el home bar / Safari tapa botones */
+  padding-top: calc(var(--sp-pad-y-top) + var(--sp-safe-top));
+  padding-right: calc(var(--sp-pad-x) + var(--sp-safe-right));
+  padding-bottom: calc(var(--sp-pad-y-bot) + var(--sp-safe-bottom));
+  padding-left: calc(var(--sp-pad-x) + var(--sp-safe-left));
 }
 
 .sp-play {
-  flex: 1 1 auto; min-height: 0; width: 100%;
-  display: flex; flex-direction: column; justify-content: center; gap: clamp(10px, 2vh, 20px);
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--sp-play-gap);
 }
+
 .sp-play > .sp-actions,
-.sp-screen > .sp-actions { margin-top: auto; padding-top: clamp(12px, 2vh, 24px); flex: none; }
+.sp-screen > .sp-actions {
+  margin-top: auto;
+  flex: none;
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  padding-top: 12px;
+  /* Extra aire sobre la barra de Safari al hacer sticky */
+  padding-bottom: max(0px, calc(var(--sp-safe-bottom) * 0.15));
+  background: linear-gradient(180deg, transparent, var(--stage-900) 28%);
+}
+
 .sp-play > .sp-hud { flex: none; }
 
-/* Superficie jugable compartida: se encoge al presupuesto de alto */
 .sp-fit {
-  flex: 1 1 auto; min-height: 0; width: 100%;
-  display: flex; align-items: center; justify-content: center;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Desktop landscape: todo el juego cabe en viewport; CTA nunca se corta */
+/* Desktop landscape: un solo viewport, sin scroll accidental */
 @media (min-width: 1024px) and (orientation: landscape) {
   .sp-screen:not(.mn) {
-    height: 100dvh; min-height: 100dvh; max-height: 100dvh; overflow: hidden;
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
   }
-  .sp-play { justify-content: flex-start; gap: 10px; overflow: hidden; }
-  .sp-screen:not(.mn) .sp-head { margin: 4px 0 8px; }
-  .sp-screen:not(.mn) .sp-hud { margin-bottom: 8px; }
-  .sp-play > .sp-actions { padding-top: 10px; }
+  .sp-play { gap: var(--sp-play-gap); overflow: hidden; }
+  .sp-play > .sp-actions,
+  .sp-screen > .sp-actions {
+    position: static;
+    background: none;
+    padding-bottom: 0;
+  }
 }
 
 /* ---------- Menú ---------- */
@@ -50,8 +93,11 @@ button { font-family: inherit; color: inherit; }
   max-width: var(--sp-menu-max);
   padding-top: clamp(20px, 3vh, 36px);
 }
-.mn-head { margin: clamp(12px, 2vh, 20px) 0 clamp(14px, 2vh, 22px); }
-.mn-head .sp-title { font-size: var(--sp-title); line-height: var(--sp-title-lh); }
+.mn-head { margin: clamp(10px, 2vh, 18px) 0 clamp(12px, 2vh, 20px); }
+.mn-head .sp-title {
+  font-size: var(--sp-title); line-height: var(--sp-title-lh);
+  overflow-wrap: anywhere; text-wrap: balance;
+}
 .mn-help, .mn-bulbs { display: none; }
 .mn-hero {
   position: relative; overflow: hidden; display: flex; align-items: center;

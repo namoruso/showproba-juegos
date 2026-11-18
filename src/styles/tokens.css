@@ -1,4 +1,10 @@
-/* ShowProba Juegos — tokens + escala fluida por viewport. */
+/* ShowProba Juegos — tokens + escala responsive (móvil → tablet → desktop).
+   Principios:
+   - Tipografía con clamp(rem, rem + vw, rem) (Chrome / WCAG: max ≤ ~2.5× min)
+   - Altos con dvh/svh (Safari chrome dinámico)
+   - Safe areas SUMADAS al padding (home indicator + barra Safari)
+   - Breakpoints por ancho; ajustes extra por alto corto (iPhone SE / landscape phone)
+*/
 :root {
   --stage-950: #0b0b0c;
   --stage-900: #121212;
@@ -36,122 +42,135 @@
   --font-display: "Unbounded", "Montserrat", system-ui, sans-serif;
   --font-body: "Outfit", system-ui, sans-serif;
 
-  /* Escala UI (móvil base) */
+  /* Safe areas (iPhone notch / home bar / landscape ears) */
+  --sp-safe-top: env(safe-area-inset-top, 0px);
+  --sp-safe-right: env(safe-area-inset-right, 0px);
+  --sp-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --sp-safe-left: env(safe-area-inset-left, 0px);
+
+  /* Escala UI — base phone (~320–390) */
   --sp-game-max: 100%;
   --sp-menu-max: 100%;
   --sp-pad-x: 16px;
-  --sp-pad-y-top: 14px;
-  --sp-pad-y-bot: 24px;
-  --sp-logo: clamp(40px, 11vw, 48px);
-  --sp-logo-lg: clamp(72px, 22vw, 96px);
-  --sp-topbar: 52px;
+  --sp-pad-y-top: 10px;
+  --sp-pad-y-bot: 16px;
+  --sp-logo: clamp(2.25rem, 2rem + 1.5vw, 2.75rem); /* ~36–44 */
+  --sp-logo-lg: clamp(4rem, 3.2rem + 4vw, 5.5rem);
+  --sp-topbar: 48px;
   --sp-icon: 44px;
-  --sp-title: clamp(26px, 7.5vw, 32px);
-  --sp-title-lh: 1.15;
-  --sp-kicker: clamp(10px, 2.8vw, 12px);
-  --sp-btn-h: 52px;
-  --sp-btn-fs: 14px;
-  --sp-chip-min: 88px;
-  --sp-chip-b: 22px;
-  --sp-chip-label: 10px;
-  --sp-body: 15px;
+  --sp-title: clamp(1.35rem, 1.15rem + 1.8vw, 1.75rem); /* ~22–28 */
+  --sp-title-lh: 1.2;
+  --sp-kicker: clamp(0.625rem, 0.55rem + 0.35vw, 0.75rem);
+  --sp-btn-h: 48px;
+  --sp-btn-fs: 0.8125rem;
+  --sp-chip-min: 0;
+  --sp-chip-b: clamp(1.125rem, 1rem + 0.6vw, 1.35rem);
+  --sp-chip-label: 0.625rem;
+  --sp-body: clamp(0.875rem, 0.82rem + 0.3vw, 1rem);
+  --sp-head-mt: 10px;
+  --sp-head-mb: 12px;
+  --sp-play-gap: 10px;
+  /* Presupuesto de juego: viewport visible con chrome (svh) + fallback dvh */
+  --sp-play-budget: calc(100svh - 220px);
 }
 
-/* Teléfonos grandes / phablet */
-@media (min-width: 430px) {
+/* Teléfonos grandes (iPhone 14/15/16 Pro ~393–430) */
+@media (min-width: 390px) {
   :root {
-    --sp-pad-x: 20px;
-    --sp-logo: 50px;
-    --sp-logo-lg: 100px;
-    --sp-title: 34px;
+    --sp-pad-x: 18px;
+    --sp-pad-y-top: 12px;
+    --sp-pad-y-bot: 18px;
+    --sp-logo: clamp(2.5rem, 2.2rem + 1.2vw, 3rem);
+    --sp-title: clamp(1.45rem, 1.2rem + 1.6vw, 1.85rem);
+    --sp-btn-h: 52px;
+    --sp-btn-fs: 0.875rem;
+    --sp-play-budget: calc(100svh - 230px);
   }
 }
 
-/* Tablet vertical */
+/* Phablet / tablet pequeña */
 @media (min-width: 600px) {
   :root {
     --sp-game-max: min(94vw, 720px);
     --sp-menu-max: min(94vw, 760px);
     --sp-pad-x: 28px;
-    --sp-pad-y-top: 20px;
-    --sp-logo: 56px;
-    --sp-logo-lg: 112px;
-    --sp-topbar: 60px;
-    --sp-icon: 52px;
-    --sp-title: 38px;
-    --sp-kicker: 13px;
-    --sp-btn-h: 56px;
-    --sp-btn-fs: 15px;
-    --sp-chip-min: 110px;
-    --sp-chip-b: 26px;
-    --sp-chip-label: 11px;
-    --sp-body: 16px;
+    --sp-pad-y-top: 16px;
+    --sp-logo: 3.25rem;
+    --sp-logo-lg: 6.5rem;
+    --sp-topbar: 56px;
+    --sp-icon: 48px;
+    --sp-title: clamp(1.75rem, 1.4rem + 1.2vw, 2.15rem);
+    --sp-kicker: 0.8125rem;
+    --sp-btn-h: 54px;
+    --sp-btn-fs: 0.9375rem;
+    --sp-chip-b: 1.5rem;
+    --sp-chip-label: 0.6875rem;
+    --sp-body: 1rem;
+    --sp-play-budget: calc(100svh - 240px);
   }
 }
 
-/* iPad / tablet ancha */
+/* iPad / tablet */
 @media (min-width: 768px) {
   :root {
-    --sp-game-max: min(92vw, 900px);
+    --sp-game-max: min(92vw, 880px);
     --sp-menu-max: min(94vw, 920px);
-    --sp-pad-x: 36px;
-    --sp-logo: 64px;
-    --sp-logo-lg: 128px;
-    --sp-topbar: 68px;
-    --sp-icon: 56px;
-    --sp-title: 44px;
-    --sp-kicker: 14px;
-    --sp-btn-h: 60px;
-    --sp-btn-fs: 16px;
-    --sp-chip-min: 128px;
-    --sp-chip-b: 30px;
-    --sp-chip-label: 12px;
-    --sp-body: 17px;
+    --sp-pad-x: 32px;
+    --sp-logo: 3.5rem;
+    --sp-logo-lg: 7rem;
+    --sp-topbar: 60px;
+    --sp-icon: 52px;
+    --sp-title: clamp(1.9rem, 1.5rem + 1vw, 2.4rem);
+    --sp-kicker: 0.875rem;
+    --sp-btn-h: 56px;
+    --sp-btn-fs: 0.9375rem;
+    --sp-chip-b: 1.625rem;
+    --sp-body: 1.0625rem;
+    --sp-play-budget: calc(100dvh - 250px);
   }
 }
 
-/* iPad Pro / desktop portrait-ish */
+/* Desktop / iPad Pro portrait */
 @media (min-width: 1024px) {
   :root {
     --sp-game-max: min(88vw, 980px);
     --sp-menu-max: min(94vw, 1100px);
-    --sp-pad-x: 40px;
-    --sp-logo: 72px;
-    --sp-logo-lg: 140px;
-    --sp-topbar: 76px;
-    --sp-icon: 60px;
-    --sp-title: 48px;
-    --sp-kicker: 15px;
-    --sp-btn-h: 64px;
-    --sp-btn-fs: 17px;
-    --sp-chip-min: 140px;
-    --sp-chip-b: 32px;
-    --sp-body: 18px;
+    --sp-pad-x: 36px;
+    --sp-logo: 3.75rem;
+    --sp-logo-lg: 7.5rem;
+    --sp-topbar: 64px;
+    --sp-icon: 52px;
+    --sp-title: clamp(2rem, 1.6rem + 0.8vw, 2.6rem);
+    --sp-btn-h: 58px;
+    --sp-btn-fs: 1rem;
+    --sp-chip-b: 1.75rem;
+    --sp-body: 1.0625rem;
   }
 }
 
-/* Escritorio / tótem landscape: menú ancho; juegos caben en 100dvh sin cortar el CTA */
+/* Desktop landscape */
 @media (min-width: 1024px) and (orientation: landscape) {
   :root {
     --sp-game-max: min(78vw, 1040px);
     --sp-menu-max: min(96vw, 1360px);
-    --sp-pad-x: 36px;
-    --sp-pad-y-top: 10px;
-    --sp-pad-y-bot: 16px;
-    --sp-logo: 44px;
-    --sp-logo-lg: 112px;
-    --sp-topbar: 52px;
+    --sp-pad-x: 32px;
+    --sp-pad-y-top: 8px;
+    --sp-pad-y-bot: 12px;
+    --sp-logo: 2.75rem;
+    --sp-logo-lg: 6.5rem;
+    --sp-topbar: 48px;
     --sp-icon: 44px;
-    --sp-title: 30px;
-    --sp-kicker: 11px;
-    --sp-btn-h: 52px;
-    --sp-btn-fs: 14px;
-    --sp-chip-min: 100px;
-    --sp-chip-b: 24px;
-    --sp-chip-label: 10px;
-    --sp-body: 15px;
-    /* Alto libre para tablero/ruleta tras topbar + título + HUD + CTA */
-    --sp-play-budget: calc(100dvh - 250px);
+    --sp-title: 1.75rem;
+    --sp-kicker: 0.75rem;
+    --sp-btn-h: 50px;
+    --sp-btn-fs: 0.875rem;
+    --sp-chip-b: 1.35rem;
+    --sp-chip-label: 0.625rem;
+    --sp-body: 0.9375rem;
+    --sp-head-mt: 4px;
+    --sp-head-mb: 8px;
+    --sp-play-gap: 8px;
+    --sp-play-budget: calc(100dvh - 230px);
   }
 }
 
@@ -159,7 +178,7 @@
   :root {
     --sp-game-max: min(72vw, 1120px);
     --sp-menu-max: min(96vw, 1400px);
-    --sp-play-budget: calc(100dvh - 240px);
+    --sp-play-budget: calc(100dvh - 220px);
   }
 }
 
@@ -167,5 +186,34 @@
   :root {
     --sp-game-max: min(64vw, 1200px);
     --sp-menu-max: min(96vw, 1480px);
+  }
+}
+
+/* Altos cortos: iPhone SE, phones en landscape, Safari con barras visibles */
+@media (max-height: 720px) {
+  :root {
+    --sp-pad-y-top: 6px;
+    --sp-pad-y-bot: 12px;
+    --sp-logo: 2.25rem;
+    --sp-logo-lg: 4.5rem;
+    --sp-topbar: 44px;
+    --sp-icon: 40px;
+    --sp-title: 1.3rem;
+    --sp-kicker: 0.625rem;
+    --sp-btn-h: 46px;
+    --sp-head-mt: 4px;
+    --sp-head-mb: 8px;
+    --sp-play-gap: 6px;
+    --sp-play-budget: calc(100svh - 200px);
+  }
+}
+
+@media (max-height: 600px) {
+  :root {
+    --sp-logo: 2rem;
+    --sp-title: 1.2rem;
+    --sp-topbar: 40px;
+    --sp-btn-h: 44px;
+    --sp-play-budget: calc(100svh - 180px);
   }
 }
