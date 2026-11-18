@@ -21,47 +21,83 @@
 
 
 /* ---------- Barra superior ---------- */
-.sp-topbar { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; height: 52px; }
-.sp-logo { display: block; height: 44px; width: auto; justify-self: center; align-self: center; object-fit: contain; flex: none; } /* alto fijo, ancho auto: nunca deformar */
-.sp-logo-lg { height: 92px; width: auto; display: block; margin: 0 auto; object-fit: contain; flex: none; align-self: center; }
-.sp-iconbtn { width: 44px; height: 44px; border-radius: var(--radius-pill); display: grid; place-items: center;
-  background: rgba(255,255,255,0.04); border: 1px solid var(--stage-600); color: var(--ink); cursor: pointer; transition: transform .15s, border-color .15s; }
+.sp-topbar {
+  display: grid; grid-template-columns: var(--sp-icon) 1fr var(--sp-icon);
+  align-items: center; height: var(--sp-topbar); gap: 8px;
+}
+.sp-logo {
+  display: block; height: var(--sp-logo); width: auto; max-width: 100%;
+  justify-self: center; align-self: center; object-fit: contain; flex: none;
+}
+.sp-logo-lg {
+  height: var(--sp-logo-lg); width: auto; max-width: min(100%, 420px);
+  display: block; margin: 0 auto; object-fit: contain; flex: none; align-self: center;
+}
+.sp-iconbtn {
+  width: var(--sp-icon); height: var(--sp-icon); border-radius: var(--radius-pill);
+  display: grid; place-items: center;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--stage-600); color: var(--ink);
+  cursor: pointer; transition: transform .15s, border-color .15s;
+}
 .sp-iconbtn:hover { border-color: var(--gold-500); color: var(--gold-400); }
 .sp-iconbtn:active { transform: scale(.94); }
-.sp-iconbtn svg { width: 20px; height: 20px; }
+.sp-iconbtn svg { width: calc(var(--sp-icon) * 0.45); height: calc(var(--sp-icon) * 0.45); }
 
 /* ---------- Cabecera de juego ---------- */
-.sp-head { text-align: center; margin: 18px 0 20px; }
-.sp-kicker { display: inline-flex; align-items: center; gap: 8px; font: 700 11px/14px var(--font-display); letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold-500); }
-.sp-kicker::before, .sp-kicker::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--gold-400); box-shadow: 0 0 8px var(--gold-400); }
-.sp-title { font: 800 30px/34px var(--font-display); letter-spacing: -0.5px; margin: 8px 0 0; }
+.sp-head { text-align: center; margin: clamp(12px, 2.5vh, 22px) 0 clamp(14px, 2.8vh, 24px); }
+.sp-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 700 var(--sp-kicker)/1.3 var(--font-display);
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold-500);
+}
+.sp-kicker::before, .sp-kicker::after {
+  content: ""; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--gold-400); box-shadow: 0 0 8px var(--gold-400);
+}
+.sp-title {
+  font: 800 var(--sp-title)/var(--sp-title-lh) var(--font-display);
+  letter-spacing: -0.5px; margin: 8px 0 0;
+}
 .sp-hl { background: linear-gradient(90deg, var(--gold-400), var(--amber-500)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 /* ---------- Botones ---------- */
-.sp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 28px;
-  border-radius: var(--radius-pill); border: 0; cursor: pointer; font: 700 14px/18px var(--font-display); letter-spacing: 1px; text-transform: uppercase;
-  transition: transform .12s ease, box-shadow .2s ease, filter .2s; white-space: nowrap; }
-.sp-btn svg { width: 18px; height: 18px; }
+.sp-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: var(--sp-btn-h); padding: 0 clamp(18px, 4vw, 32px);
+  border-radius: var(--radius-pill); border: 0; cursor: pointer;
+  font: 700 var(--sp-btn-fs)/1.25 var(--font-display); letter-spacing: 1px; text-transform: uppercase;
+  transition: transform .12s ease, box-shadow .2s ease, filter .2s; white-space: nowrap;
+}
+.sp-btn svg { width: 1.15em; height: 1.15em; }
 .sp-btn-primary { color: var(--gold-ink); background: linear-gradient(180deg, var(--gold-300) -40%, var(--gold-500) 45%, var(--amber-500) 110%); box-shadow: var(--glow-gold), inset 0 1px 0 rgba(255,255,255,0.5); }
 .sp-btn-primary:hover { filter: brightness(1.06); transform: translateY(-1px); }
 .sp-btn-primary:active { transform: translateY(1px) scale(.98); }
 .sp-btn-secondary { color: var(--ink); background: var(--stage-700); border: 1px solid var(--stage-600); }
 .sp-btn-secondary:hover { border-color: var(--gold-500); }
 .sp-btn-ghost { color: var(--gold-400); background: transparent; border: 1px solid rgba(255,214,0,0.4); }
-.sp-btn-sm { min-height: 40px; padding: 0 18px; font-size: 12px; }
+.sp-btn-sm { min-height: calc(var(--sp-btn-h) * 0.76); padding: 0 18px; font-size: calc(var(--sp-btn-fs) * 0.86); }
 .sp-btn-block { width: 100%; }
 .sp-btn[disabled] { opacity: .4; pointer-events: none; }
-.sp-actions { margin-top: auto; display: flex; gap: 12px; }
+.sp-actions { margin-top: auto; display: flex; gap: clamp(10px, 2vw, 16px); }
 .sp-actions .sp-btn { flex: 1; }
 
 /* ---------- HUD ---------- */
-.sp-hud { display: flex; gap: 10px; justify-content: center; margin-bottom: 18px; }
-.sp-chip { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 92px; padding: 8px 14px; border-radius: 18px;
-  background: var(--stage-800); border: 1px solid var(--stage-600); }
-.sp-chip b { font: 800 22px/24px var(--font-display); color: var(--gold-400); font-variant-numeric: tabular-nums; }
-.sp-chip span { font: 600 10px/12px var(--font-body); letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-muted); }
+.sp-hud { display: flex; flex-wrap: wrap; gap: clamp(8px, 1.6vw, 16px); justify-content: center; margin-bottom: clamp(14px, 2.5vh, 22px); }
+.sp-chip {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  min-width: var(--sp-chip-min); padding: clamp(8px, 1.2vw, 12px) clamp(12px, 2vw, 20px);
+  border-radius: 18px; background: var(--stage-800); border: 1px solid var(--stage-600);
+}
+.sp-chip b {
+  font: 800 var(--sp-chip-b)/1.1 var(--font-display); color: var(--gold-400);
+  font-variant-numeric: tabular-nums;
+}
+.sp-chip span {
+  font: 600 var(--sp-chip-label)/1.2 var(--font-body); letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--ink-muted);
+}
 .sp-chip.is-warn b { color: var(--signal-error); }
-.sp-progress { height: 8px; border-radius: 99px; background: var(--stage-700); overflow: hidden; }
+.sp-progress { height: clamp(8px, 1vw, 12px); border-radius: 99px; background: var(--stage-700); overflow: hidden; }
 .sp-progress i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--gold-400), var(--amber-500)); box-shadow: 0 0 12px rgba(255,193,0,.6); }
 
 /* ---------- Tarjetas ---------- */

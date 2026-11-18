@@ -1,133 +1,138 @@
-/* Layout de la app: móvil primero → tablet → tótem/escritorio. */
+/* Layout: móvil → tablet → tótem. Anchos y tipografía vienen de tokens (--sp-*). */
 html, body, #root { margin: 0; min-height: 100%; background: var(--stage-900); }
 body { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
 button { font-family: inherit; color: inherit; }
 :focus-visible { outline: 3px solid var(--gold-400); outline-offset: 3px; }
 
 .sp-app { min-height: 100vh; min-height: 100dvh; width: 100%; background-attachment: fixed; }
+
 .sp-screen {
-  position: relative; width: 100%; max-width: min(100%, 480px); min-height: 100vh; min-height: 100dvh; margin: 0 auto;
+  position: relative;
+  width: 100%;
+  max-width: var(--sp-game-max);
+  min-height: 100vh; min-height: 100dvh;
+  margin: 0 auto;
   display: flex; flex-direction: column;
-  padding: max(14px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  padding:
+    max(var(--sp-pad-y-top), env(safe-area-inset-top))
+    max(var(--sp-pad-x), env(safe-area-inset-right))
+    max(var(--sp-pad-y-bot), env(safe-area-inset-bottom))
+    max(var(--sp-pad-x), env(safe-area-inset-left));
 }
 
-/* Zona jugable: ocupa el alto libre y centra el contenido; la barra de acciones queda abajo */
 .sp-play {
   flex: 1 1 auto; min-height: 0; width: 100%;
-  display: flex; flex-direction: column; justify-content: center; gap: 12px;
+  display: flex; flex-direction: column; justify-content: center; gap: clamp(10px, 2vh, 20px);
 }
 .sp-play > .sp-actions,
-.sp-screen > .sp-actions { margin-top: auto; padding-top: 20px; flex: none; }
+.sp-screen > .sp-actions { margin-top: auto; padding-top: clamp(16px, 2.5vh, 28px); flex: none; }
 .sp-play > .sp-hud { flex: none; }
 
 /* ---------- Menú ---------- */
-.mn { padding-top: 28px; max-width: min(100%, 480px); }
-.mn-head { margin: 16px 0 18px; }
-.mn-head .sp-title { font-size: clamp(24px, 6.2vw, 28px); line-height: 1.2; }
+.mn {
+  max-width: var(--sp-menu-max);
+  padding-top: clamp(20px, 3vh, 36px);
+}
+.mn-head { margin: clamp(12px, 2vh, 20px) 0 clamp(14px, 2vh, 22px); }
+.mn-head .sp-title { font-size: var(--sp-title); line-height: var(--sp-title-lh); }
 .mn-help, .mn-bulbs { display: none; }
-.mn-hero { position: relative; overflow: hidden; display: flex; align-items: center; min-height: 168px; padding: 18px; border-radius: var(--radius-lg); cursor: pointer;
-  background: radial-gradient(120% 120% at 100% 50%, var(--navy-800), var(--stage-800) 70%); border: 1px solid rgba(255,214,0,.35); box-shadow: var(--lift); transition: transform .18s; }
+.mn-hero {
+  position: relative; overflow: hidden; display: flex; align-items: center;
+  min-height: clamp(160px, 22vw, 220px); padding: clamp(16px, 2.5vw, 28px);
+  border-radius: var(--radius-lg); cursor: pointer;
+  background: radial-gradient(120% 120% at 100% 50%, var(--navy-800), var(--stage-800) 70%);
+  border: 1px solid rgba(255,214,0,.35); box-shadow: var(--lift); transition: transform .18s;
+}
 .mn-hero:hover { transform: translateY(-2px); }
 .mn-hero-txt { position: relative; z-index: 1; max-width: 62%; }
-.mn-hero h2 { font: 800 22px/26px var(--font-display); margin: 10px 0 4px; }
-.mn-hero p { font: 400 13px/18px var(--font-body); color: var(--ink-muted); margin: 0 0 14px; }
-.mn-wheel { position: absolute; right: -54px; top: 50%; width: 190px; height: 190px; translate: 0 -50%; animation: mn-spin 18s linear infinite; }
+.mn-hero h2 { font: 800 clamp(20px, 4vw, 32px)/1.15 var(--font-display); margin: 10px 0 4px; }
+.mn-hero p { font: 400 clamp(13px, 2vw, 16px)/1.4 var(--font-body); color: var(--ink-muted); margin: 0 0 14px; }
+.mn-wheel {
+  position: absolute; right: -54px; top: 50%;
+  width: clamp(170px, 28vw, 280px); height: clamp(170px, 28vw, 280px);
+  translate: 0 -50%; animation: mn-spin 18s linear infinite;
+}
 @keyframes mn-spin { to { rotate: 360deg; } }
-.mn-label { margin: 22px 0 10px; font: 600 12px/16px var(--font-body); letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-muted); }
-.mn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mn-label {
+  margin: 22px 0 10px; font: 600 12px/16px var(--font-body);
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-muted);
+}
+.mn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 2vw, 16px); }
 .mn-grid .sp-gcard { text-align: left; padding: 0; font: inherit; }
 .mn-grid .sp-gcard:last-child:nth-child(odd) { grid-column: span 2; }
 
-/* Tablet vertical / pantallas medianas */
 @media (min-width: 600px) {
-  .sp-screen { max-width: min(100%, 640px); padding-left: 28px; padding-right: 28px; }
-  .mn { max-width: min(100%, 720px); }
-  .mn-logo.sp-logo-lg { height: 104px; }
-  .mn-head .sp-title { font-size: 34px; line-height: 40px; }
-  .mn-hero { min-height: 188px; padding: 22px 24px; }
-  .mn-hero h2 { font-size: 26px; line-height: 30px; }
-  .mn-hero p { font-size: 14px; line-height: 20px; }
-  .mn-wheel { width: 220px; height: 220px; right: -36px; }
-  .mn-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .mn-grid { grid-template-columns: repeat(3, 1fr); }
   .mn-grid .sp-gcard:last-child:nth-child(odd) { grid-column: auto; }
-  .mn-grid .sp-gcard .sp-art { height: 88px; }
-  .sp-screen:not(.mn) { max-width: min(100%, 640px); }
-  .sp-title { font-size: 34px; line-height: 38px; }
-  .sp-chip { min-width: 104px; }
-  .sp-chip b { font-size: 24px; line-height: 26px; }
+  .mn-grid .sp-gcard .sp-art { height: clamp(88px, 12vw, 110px); }
+  .mn-help {
+    display: block; font: 400 var(--sp-body)/1.5 var(--font-body);
+    color: var(--ink-muted); margin: 12px 0 0;
+  }
 }
 
-/* iPad / tablet ancha: los juegos deben ocupar el escenario, no un “móvil” flotante */
-@media (min-width: 768px) {
-  .sp-screen:not(.mn) { max-width: min(92vw, 760px); }
-  .sp-title { font-size: 38px; line-height: 42px; }
-  .sp-hud { gap: 14px; margin-bottom: 22px; }
-  .sp-chip { min-width: 120px; padding: 10px 18px; border-radius: 20px; }
-  .sp-chip b { font-size: 28px; line-height: 30px; }
-  .sp-btn { min-height: 56px; font-size: 15px; }
-  .sp-logo { height: 52px; }
-}
-
-/* Tablet ancha / laptop en vertical */
 @media (min-width: 900px) {
-  .sp-screen { max-width: min(100%, 600px); }
-  .mn { max-width: min(100%, 980px); padding-top: 36px; }
-  .mn-head .sp-title { font-size: 40px; line-height: 46px; }
-  .mn-help { display: block; font: 400 16px/24px var(--font-body); color: var(--ink-muted); margin: 12px 0 0; }
-  .mn-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .mn-grid .sp-gcard .sp-art { height: 100px; }
   .mn-grid .sp-gcard h3 { font-size: 16px; }
-  .sp-screen:not(.mn) { max-width: min(86vw, 820px); }
+  .mn-grid .sp-gcard p { font-size: 13px; }
 }
 
 /* Tótem / escritorio horizontal */
 @media (min-width: 1024px) and (orientation: landscape) {
-  .mn { max-width: 1360px; display: grid; grid-template-columns: minmax(300px, 380px) 1fr; gap: 48px; align-items: center; padding: 32px 56px; }
+  .mn {
+    display: grid; grid-template-columns: minmax(280px, 380px) 1fr;
+    gap: clamp(32px, 4vw, 56px); align-items: center;
+    padding: 32px clamp(32px, 4vw, 56px);
+  }
   .mn-intro { display: flex; flex-direction: column; align-items: flex-start; }
-  .mn-logo.sp-logo-lg { height: 112px; margin: 0; align-self: flex-start; }
+  .mn-logo.sp-logo-lg { margin: 0; align-self: flex-start; max-width: 100%; }
   .mn-head { text-align: left; margin: 32px 0 0; }
-  .mn-head .sp-title { font-size: 46px; line-height: 52px; margin-top: 12px; }
-  .mn-help { display: block; font: 400 18px/27px var(--font-body); color: var(--ink-muted); margin: 16px 0 28px; }
+  .mn-head .sp-title { margin-top: 12px; }
+  .mn-help { margin: 16px 0 28px; font-size: 18px; line-height: 27px; }
   .mn-bulbs { display: block; width: 220px; }
-  .mn-games { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-self: center; }
-  .mn-hero { grid-column: span 3; min-height: 196px; padding: 26px 30px; }
-  .mn-hero h2 { font-size: 32px; line-height: 38px; }
-  .mn-hero p { font-size: 16px; line-height: 22px; }
-  .mn-wheel { width: 280px; height: 280px; right: -40px; }
+  .mn-games {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 14px; align-self: center;
+  }
+  .mn-hero { grid-column: span 3; min-height: 196px; }
   .mn-label { display: none; }
   .mn-grid { display: contents; }
   .mn-grid .sp-gcard:last-child:nth-child(odd) { grid-column: auto; }
   .mn-grid .sp-gcard .sp-art { height: 96px; }
   .mn-grid .sp-gcard h3 { font-size: 14px; }
-  .sp-btn { min-height: 56px; }
-  /* En landscape los juegos se centran a un ancho cómodo para tocar */
-  .sp-screen:not(.mn) { max-width: min(56vw, 720px); }
-}
-
-/* Pantallas altas: un poco más de aire vertical en juegos */
-@media (min-height: 820px) {
-  .sp-play { gap: 18px; }
-  .sp-head { margin: 22px 0 24px; }
 }
 
 /* ---------- Resultados ---------- */
-.rs-hero { position: relative; text-align: center; padding-top: 30px; }
+.rs-hero { position: relative; text-align: center; padding-top: clamp(20px, 4vh, 36px); }
 .rs-hero .sp-head { margin-top: 22px; }
-.rs-rays { position: absolute; left: 50%; top: -10px; width: 300px; height: 300px; margin-left: -150px; pointer-events: none;
+.rs-rays {
+  position: absolute; left: 50%; top: -10px; width: min(360px, 70vw); height: min(360px, 70vw);
+  margin-left: calc(min(360px, 70vw) / -2); pointer-events: none;
   background: repeating-conic-gradient(rgba(255,214,0,.12) 0 8deg, transparent 8deg 20deg);
-  -webkit-mask: radial-gradient(closest-side, #000 30%, transparent); mask: radial-gradient(closest-side, #000 30%, transparent); animation: mn-spin 30s linear infinite; }
-.rs-medal { position: relative; width: 140px; height: 140px; margin: 0 auto; border-radius: 50%; display: grid; place-items: center; color: var(--gold-ink);
-  background: radial-gradient(circle at 35% 30%, var(--gold-300), var(--gold-500) 55%, var(--amber-500)); box-shadow: 0 0 0 8px var(--gold-tint), var(--glow-gold); animation: sp-pop .6s both; }
+  -webkit-mask: radial-gradient(closest-side, #000 30%, transparent);
+  mask: radial-gradient(closest-side, #000 30%, transparent);
+  animation: mn-spin 30s linear infinite;
+}
+.rs-medal {
+  position: relative; width: clamp(120px, 22vw, 168px); height: clamp(120px, 22vw, 168px);
+  margin: 0 auto; border-radius: 50%; display: grid; place-items: center; color: var(--gold-ink);
+  background: radial-gradient(circle at 35% 30%, var(--gold-300), var(--gold-500) 55%, var(--amber-500));
+  box-shadow: 0 0 0 8px var(--gold-tint), var(--glow-gold); animation: sp-pop .6s both;
+}
 .rs.is-lose .rs-medal { background: var(--stage-700); color: var(--ink-muted); box-shadow: 0 0 0 8px var(--stage-800); }
 .rs.is-lose .sp-kicker { color: var(--signal-error); }
 .rs.is-lose .sp-kicker::before, .rs.is-lose .sp-kicker::after { background: var(--signal-error); box-shadow: none; }
-.rs-ticket { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; border-radius: var(--radius-md);
-  background: var(--gold-tint); border: 2px dashed var(--gold-500); margin-top: 6px; animation: sp-pop .5s .2s both; }
+.rs-ticket {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: clamp(14px, 2vw, 20px) clamp(16px, 2.5vw, 22px); border-radius: var(--radius-md);
+  background: var(--gold-tint); border: 2px dashed var(--gold-500); margin-top: 6px; animation: sp-pop .5s .2s both;
+}
 .rs-ticket small { display: block; font: 600 10px var(--font-body); letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-muted); }
-.rs-ticket strong { font: 800 18px/22px var(--font-display); color: var(--gold-400); }
-.rs-code { flex: none; font: 800 14px var(--font-display); letter-spacing: 2px; padding: 8px 10px; border-radius: 10px; background: var(--stage-950); user-select: all; }
-.rs-tip { text-align: center; color: var(--ink-muted); font-size: 15px; line-height: 22px; margin: 12px 16px 0; }
+.rs-ticket strong { font: 800 clamp(16px, 2.5vw, 22px)/1.2 var(--font-display); color: var(--gold-400); }
+.rs-code {
+  flex: none; font: 800 clamp(12px, 2vw, 16px) var(--font-display); letter-spacing: 2px;
+  padding: 8px 10px; border-radius: 10px; background: var(--stage-950); user-select: all;
+}
+.rs-tip { text-align: center; color: var(--ink-muted); font-size: var(--sp-body); line-height: 1.45; margin: 12px 16px 0; }
 
-/* Dos botones en la barra de acciones: el secundario se ajusta a su texto, el primario ocupa el resto */
-.sp-actions .sp-btn { min-width: 0; padding: 0 18px; }
+.sp-actions .sp-btn { min-width: 0; padding: 0 clamp(14px, 3vw, 22px); }
 .sp-actions .sp-btn-secondary:not(:only-child) { flex: 0 0 auto; }

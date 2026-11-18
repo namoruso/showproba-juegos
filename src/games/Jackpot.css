@@ -1,21 +1,22 @@
-.jp-machine { padding: 12px; border-radius: var(--radius-xl); background: linear-gradient(180deg, var(--navy-800), var(--navy-900)); border: 2px solid var(--gold-500); box-shadow: var(--lift), var(--glow-soft); transition: box-shadow .3s; }
+.jp-machine {
+  padding: clamp(12px, 2.5vw, 22px); width: 100%; border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, var(--navy-800), var(--navy-900));
+  border: 2px solid var(--gold-500); box-shadow: var(--lift), var(--glow-soft); transition: box-shadow .3s;
+}
 .jp-machine.is-won { box-shadow: var(--lift), var(--glow-gold); }
 .jp-bulbs { display: flex; justify-content: space-between; padding: 0 10px; }
-.jp-bulbs i { width: 8px; height: 8px; border-radius: 50%; background: var(--gold-300); box-shadow: 0 0 8px var(--gold-400); animation: sp-blink .8s infinite; }
+.jp-bulbs i { width: clamp(8px, 1.2vw, 12px); height: clamp(8px, 1.2vw, 12px); border-radius: 50%; background: var(--gold-300); box-shadow: 0 0 8px var(--gold-400); animation: sp-blink .8s infinite; }
 .jp-bulbs i:nth-child(even) { animation-delay: .4s; }
 .jp-machine.is-won .jp-bulbs i { animation-duration: .25s; }
-.jp-sign { text-align: center; margin: 10px 0; font: 800 22px var(--font-display); letter-spacing: 6px; color: var(--gold-400); text-shadow: 0 0 18px rgba(255,193,0,.6); }
-.jp-window { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 8px; border-radius: var(--radius-md); background: var(--stage-950); margin-bottom: 10px; }
-.jp-reel { display: flex; flex-direction: column; align-items: center; border-radius: 12px; background: linear-gradient(180deg, var(--stage-800), var(--stage-700) 50%, var(--stage-800)); overflow: hidden; transition: box-shadow .2s, background .2s; }
-.jp-reel span { display: grid; place-items: center; height: 58px; color: var(--gold-400); }
-.jp-reel .jp-ghost { opacity: .25; height: 34px; color: var(--ink); }
-@media (min-width: 768px) {
-  .jp-machine { padding: 18px; }
-  .jp-sign { font-size: 28px; letter-spacing: 8px; }
-  .jp-reel span { height: 78px; }
-  .jp-reel .jp-ghost { height: 44px; }
-  .jp-pull { min-height: 64px; font-size: 17px; }
+.jp-sign {
+  text-align: center; margin: 10px 0;
+  font: 800 clamp(20px, 4vw, 32px) var(--font-display); letter-spacing: clamp(4px, 1vw, 10px);
+  color: var(--gold-400); text-shadow: 0 0 18px rgba(255,193,0,.6);
 }
+.jp-window { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(8px, 1.5vw, 14px); padding: clamp(8px, 1.5vw, 14px); border-radius: var(--radius-md); background: var(--stage-950); margin-bottom: 10px; }
+.jp-reel { display: flex; flex-direction: column; align-items: center; border-radius: 12px; background: linear-gradient(180deg, var(--stage-800), var(--stage-700) 50%, var(--stage-800)); overflow: hidden; transition: box-shadow .2s, background .2s; }
+.jp-reel span { display: grid; place-items: center; height: clamp(58px, 10vw, 88px); color: var(--gold-400); }
+.jp-reel .jp-ghost { opacity: .25; height: clamp(34px, 6vw, 48px); color: var(--ink); }
 .jp-reel.is-spinning span { filter: blur(1.5px); }
 .jp-reel.is-hit { background: var(--gold-tint); box-shadow: inset 0 0 0 2px var(--gold-400); }
 .jp-reel.is-hit .jp-main { color: var(--gold-300); filter: drop-shadow(0 0 10px rgba(255,214,0,.8)); animation: sp-pop .4s; }
@@ -24,6 +25,6 @@
 .jp-pay span { display: inline-flex; align-items: center; gap: 4px; }
 .jp-pay svg { color: var(--gold-500); }
 .jp-msg { text-align: center; margin-top: 16px; animation: sp-pop .5s; }
-.jp-msg strong { display: block; margin-top: 6px; font: 700 20px var(--font-display); }
-.jp-miss { text-align: center; margin-top: 12px; font: 600 14px var(--font-body); color: var(--ink-muted); }
-.jp-pull { min-height: 60px; font-size: 16px; }
+.jp-msg strong { display: block; margin-top: 6px; font: 700 clamp(18px, 3vw, 24px) var(--font-display); }
+.jp-miss { text-align: center; margin-top: 12px; font: 600 var(--sp-body) var(--font-body); color: var(--ink-muted); }
+.jp-pull { min-height: var(--sp-btn-h); font-size: var(--sp-btn-fs); }
