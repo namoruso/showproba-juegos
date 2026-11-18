@@ -71,7 +71,7 @@ export function GameScreen({ onBack, kicker, title, highlight, children, classNa
     <main className={`sp-screen ${className}`}>
       <TopBar onBack={onBack} />
       {kicker && <GameHeader kicker={kicker} title={title} highlight={highlight} />}
-      {children}
+      <div className="sp-play">{children}</div>
     </main>
   );
 }

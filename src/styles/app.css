@@ -1,18 +1,29 @@
-/* Layout de la app: móvil primero, tótem/escritorio con media queries. */
+/* Layout de la app: móvil primero → tablet → tótem/escritorio. */
 html, body, #root { margin: 0; min-height: 100%; background: var(--stage-900); }
 body { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
 button { font-family: inherit; color: inherit; }
 :focus-visible { outline: 3px solid var(--gold-400); outline-offset: 3px; }
 
-.sp-app { min-height: 100vh; min-height: 100dvh; background-attachment: fixed; }
-.sp-screen { position: relative; width: 100%; max-width: 480px; min-height: 100vh; min-height: 100dvh; margin: 0 auto;
-  display: flex; flex-direction: column; padding: max(14px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom)); }
-.sp-screen > .sp-actions { padding-top: 20px; }
+.sp-app { min-height: 100vh; min-height: 100dvh; width: 100%; background-attachment: fixed; }
+.sp-screen {
+  position: relative; width: 100%; max-width: min(100%, 480px); min-height: 100vh; min-height: 100dvh; margin: 0 auto;
+  display: flex; flex-direction: column;
+  padding: max(14px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+}
+
+/* Zona jugable: ocupa el alto libre y centra el contenido; la barra de acciones queda abajo */
+.sp-play {
+  flex: 1 1 auto; min-height: 0; width: 100%;
+  display: flex; flex-direction: column; justify-content: center; gap: 12px;
+}
+.sp-play > .sp-actions,
+.sp-screen > .sp-actions { margin-top: auto; padding-top: 20px; flex: none; }
+.sp-play > .sp-hud { flex: none; }
 
 /* ---------- Menú ---------- */
-.mn { padding-top: 28px; }
+.mn { padding-top: 28px; max-width: min(100%, 480px); }
 .mn-head { margin: 16px 0 18px; }
-.mn-head .sp-title { font-size: 26px; line-height: 31px; }
+.mn-head .sp-title { font-size: clamp(24px, 6.2vw, 28px); line-height: 1.2; }
 .mn-help, .mn-bulbs { display: none; }
 .mn-hero { position: relative; overflow: hidden; display: flex; align-items: center; min-height: 168px; padding: 18px; border-radius: var(--radius-lg); cursor: pointer;
   background: radial-gradient(120% 120% at 100% 50%, var(--navy-800), var(--stage-800) 70%); border: 1px solid rgba(255,214,0,.35); box-shadow: var(--lift); transition: transform .18s; }
@@ -27,16 +38,43 @@ button { font-family: inherit; color: inherit; }
 .mn-grid .sp-gcard { text-align: left; padding: 0; font: inherit; }
 .mn-grid .sp-gcard:last-child:nth-child(odd) { grid-column: span 2; }
 
+/* Tablet vertical / pantallas medianas */
+@media (min-width: 600px) {
+  .sp-screen { max-width: min(100%, 560px); padding-left: 24px; padding-right: 24px; }
+  .mn { max-width: min(100%, 720px); }
+  .mn-logo.sp-logo-lg { height: 104px; }
+  .mn-head .sp-title { font-size: 34px; line-height: 40px; }
+  .mn-hero { min-height: 188px; padding: 22px 24px; }
+  .mn-hero h2 { font-size: 26px; line-height: 30px; }
+  .mn-hero p { font-size: 14px; line-height: 20px; }
+  .mn-wheel { width: 220px; height: 220px; right: -36px; }
+  .mn-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .mn-grid .sp-gcard:last-child:nth-child(odd) { grid-column: auto; }
+  .mn-grid .sp-gcard .sp-art { height: 88px; }
+}
+
+/* Tablet ancha / laptop en vertical */
+@media (min-width: 900px) {
+  .sp-screen { max-width: min(100%, 600px); }
+  .mn { max-width: min(100%, 980px); padding-top: 36px; }
+  .mn-head .sp-title { font-size: 40px; line-height: 46px; }
+  .mn-help { display: block; font: 400 16px/24px var(--font-body); color: var(--ink-muted); margin: 12px 0 0; }
+  .mn-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .mn-grid .sp-gcard .sp-art { height: 100px; }
+  .mn-grid .sp-gcard h3 { font-size: 16px; }
+  .sp-screen:not(.mn) { max-width: min(100%, 560px); }
+}
+
 /* Tótem / escritorio horizontal */
 @media (min-width: 1024px) and (orientation: landscape) {
-  .mn { max-width: 1360px; display: grid; grid-template-columns: 380px 1fr; gap: 48px; align-items: center; padding: 32px 56px; }
+  .mn { max-width: 1360px; display: grid; grid-template-columns: minmax(300px, 380px) 1fr; gap: 48px; align-items: center; padding: 32px 56px; }
   .mn-intro { display: flex; flex-direction: column; align-items: flex-start; }
   .mn-logo.sp-logo-lg { height: 112px; margin: 0; align-self: flex-start; }
   .mn-head { text-align: left; margin: 32px 0 0; }
   .mn-head .sp-title { font-size: 46px; line-height: 52px; margin-top: 12px; }
   .mn-help { display: block; font: 400 18px/27px var(--font-body); color: var(--ink-muted); margin: 16px 0 28px; }
   .mn-bulbs { display: block; width: 220px; }
-  .mn-games { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .mn-games { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-self: center; }
   .mn-hero { grid-column: span 3; min-height: 196px; padding: 26px 30px; }
   .mn-hero h2 { font-size: 32px; line-height: 38px; }
   .mn-hero p { font-size: 16px; line-height: 22px; }
@@ -46,16 +84,14 @@ button { font-family: inherit; color: inherit; }
   .mn-grid .sp-gcard:last-child:nth-child(odd) { grid-column: auto; }
   .mn-grid .sp-gcard .sp-art { height: 96px; }
   .mn-grid .sp-gcard h3 { font-size: 14px; }
-  .mn-games { align-self: center; }
   .sp-btn { min-height: 56px; }
+  .sp-screen:not(.mn) { max-width: min(100%, 580px); }
 }
 
-/* Juegos en pantallas grandes: columna centrada, un poco más grande */
-@media (min-width: 900px) {
-  .sp-screen:not(.mn) { max-width: 520px; }
-}
-@media (min-width: 900px) and (min-height: 900px) {
-  .sp-screen:not(.mn) { zoom: 1.15; }
+/* Pantallas altas: un poco más de aire vertical en juegos */
+@media (min-height: 820px) {
+  .sp-play { gap: 18px; }
+  .sp-head { margin: 22px 0 24px; }
 }
 
 /* ---------- Resultados ---------- */
