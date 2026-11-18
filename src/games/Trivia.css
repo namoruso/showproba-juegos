@@ -1,5 +1,12 @@
 .tv-podium { position: relative; height: 200px; display: grid; place-items: center; }
 .tv-q { position: relative; z-index: 1; width: 132px; height: 132px; border-radius: 36px; transform: rotate(-6deg); display: grid; place-items: center; font: 800 84px/1 var(--font-display); color: var(--gold-ink); background: linear-gradient(160deg, var(--gold-300), var(--gold-500) 50%, var(--amber-500)); box-shadow: var(--glow-gold); animation: tv-float 3s ease-in-out infinite; }
+@media (min-width: 768px) {
+  .tv-podium { height: 240px; }
+  .tv-q { width: 168px; height: 168px; border-radius: 44px; font-size: 104px; }
+  .tv-card { font-size: 22px; line-height: 30px; padding: 28px 24px; }
+  .tv-opt { min-height: 64px; font-size: 18px; }
+  .tv-rules b { font-size: 30px; line-height: 34px; }
+}
 @keyframes tv-float { 50% { transform: rotate(-2deg) translateY(-6px); } }
 .tv-spot { position: absolute; bottom: 4px; width: 220px; height: 40px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,193,0,.35), transparent); }
 .tv-rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }

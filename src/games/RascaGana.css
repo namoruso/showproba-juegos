@@ -1,5 +1,13 @@
-.rg-ticket { position: relative; margin-top: 4px; padding: 16px; border-radius: var(--radius-xl); background: linear-gradient(180deg, var(--navy-800), var(--navy-900));
-  border: 2px dashed var(--gold-500); box-shadow: var(--lift); transition: box-shadow .3s; }
+.rg-ticket {
+  position: relative; margin-top: 4px; padding: 16px; width: min(100%, 520px); margin-inline: auto;
+  border-radius: var(--radius-xl); background: linear-gradient(180deg, var(--navy-800), var(--navy-900));
+  border: 2px dashed var(--gold-500); box-shadow: var(--lift); transition: box-shadow .3s;
+}
+@media (min-width: 768px) {
+  .rg-ticket { width: min(100%, 640px); padding: 22px; }
+  .rg-area { aspect-ratio: 16 / 10; }
+  .rg-foot { font-size: 16px; }
+}
 .rg-ticket::before, .rg-ticket::after { content: ""; position: absolute; top: 50%; width: 24px; height: 24px; margin-top: -12px; border-radius: 50%; background: var(--stage-900); border: 2px dashed var(--gold-500); }
 .rg-ticket::before { left: -14px; clip-path: inset(0 0 0 50%); }
 .rg-ticket::after { right: -14px; clip-path: inset(0 50% 0 0); }

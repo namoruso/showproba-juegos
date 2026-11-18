@@ -40,7 +40,7 @@ button { font-family: inherit; color: inherit; }
 
 /* Tablet vertical / pantallas medianas */
 @media (min-width: 600px) {
-  .sp-screen { max-width: min(100%, 560px); padding-left: 24px; padding-right: 24px; }
+  .sp-screen { max-width: min(100%, 640px); padding-left: 28px; padding-right: 28px; }
   .mn { max-width: min(100%, 720px); }
   .mn-logo.sp-logo-lg { height: 104px; }
   .mn-head .sp-title { font-size: 34px; line-height: 40px; }
@@ -51,6 +51,21 @@ button { font-family: inherit; color: inherit; }
   .mn-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .mn-grid .sp-gcard:last-child:nth-child(odd) { grid-column: auto; }
   .mn-grid .sp-gcard .sp-art { height: 88px; }
+  .sp-screen:not(.mn) { max-width: min(100%, 640px); }
+  .sp-title { font-size: 34px; line-height: 38px; }
+  .sp-chip { min-width: 104px; }
+  .sp-chip b { font-size: 24px; line-height: 26px; }
+}
+
+/* iPad / tablet ancha: los juegos deben ocupar el escenario, no un “móvil” flotante */
+@media (min-width: 768px) {
+  .sp-screen:not(.mn) { max-width: min(92vw, 760px); }
+  .sp-title { font-size: 38px; line-height: 42px; }
+  .sp-hud { gap: 14px; margin-bottom: 22px; }
+  .sp-chip { min-width: 120px; padding: 10px 18px; border-radius: 20px; }
+  .sp-chip b { font-size: 28px; line-height: 30px; }
+  .sp-btn { min-height: 56px; font-size: 15px; }
+  .sp-logo { height: 52px; }
 }
 
 /* Tablet ancha / laptop en vertical */
@@ -62,7 +77,7 @@ button { font-family: inherit; color: inherit; }
   .mn-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .mn-grid .sp-gcard .sp-art { height: 100px; }
   .mn-grid .sp-gcard h3 { font-size: 16px; }
-  .sp-screen:not(.mn) { max-width: min(100%, 560px); }
+  .sp-screen:not(.mn) { max-width: min(86vw, 820px); }
 }
 
 /* Tótem / escritorio horizontal */
@@ -85,7 +100,8 @@ button { font-family: inherit; color: inherit; }
   .mn-grid .sp-gcard .sp-art { height: 96px; }
   .mn-grid .sp-gcard h3 { font-size: 14px; }
   .sp-btn { min-height: 56px; }
-  .sp-screen:not(.mn) { max-width: min(100%, 580px); }
+  /* En landscape los juegos se centran a un ancho cómodo para tocar */
+  .sp-screen:not(.mn) { max-width: min(56vw, 720px); }
 }
 
 /* Pantallas altas: un poco más de aire vertical en juegos */

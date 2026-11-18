@@ -1,6 +1,14 @@
-.sopa-board { display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px; touch-action: none; user-select: none; -webkit-user-select: none; }
+.sopa-board {
+  display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px;
+  width: min(100%, 520px); margin-inline: auto;
+  touch-action: none; user-select: none; -webkit-user-select: none;
+}
 .sopa-board.is-wrong { animation: sp-shake .35s; }
-.sopa-cell { aspect-ratio: 1; display: grid; place-items: center; border-radius: var(--radius-sm); font: 700 clamp(14px, 4vw, 18px) var(--font-display); color: var(--ink); transition: background .12s, color .12s; cursor: pointer; }
+.sopa-cell { aspect-ratio: 1; display: grid; place-items: center; border-radius: var(--radius-sm); font: 700 clamp(14px, 3.4vw, 22px) var(--font-display); color: var(--ink); transition: background .12s, color .12s; cursor: pointer; }
+@media (min-width: 768px) {
+  .sopa-board { width: min(100%, 640px); gap: 4px; }
+  .sopa-word { height: 36px; font-size: 12px; }
+}
 .sopa-cell.is-found { background: linear-gradient(135deg, var(--gold-400), var(--amber-500)); color: var(--gold-ink); box-shadow: 0 0 12px rgba(255,193,0,.35); }
 .sopa-cell.is-sel { background: var(--navy-600); color: var(--ink); box-shadow: inset 0 0 0 2px var(--gold-400); }
 .sopa-hint { text-align: center; margin: 14px 0 12px; font: 500 13px var(--font-body); color: var(--ink-muted); min-height: 18px; }

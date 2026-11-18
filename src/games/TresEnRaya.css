@@ -11,7 +11,14 @@
 .ttt-status i { width: 8px; height: 8px; border-radius: 50%; background: var(--gold-400); animation: sp-blink 1s infinite; }
 .ttt-status.is-won { color: var(--gold-400); font-family: var(--font-display); font-weight: 700; }
 .ttt-status.is-lost { color: var(--signal-error); font-family: var(--font-display); font-weight: 700; }
-.ttt-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 12px; border-radius: var(--radius-lg); background: var(--stage-950); border: 1px solid var(--stage-600); }
+.ttt-board {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 12px;
+  width: min(100%, 420px); margin-inline: auto;
+  border-radius: var(--radius-lg); background: var(--stage-950); border: 1px solid var(--stage-600);
+}
+@media (min-width: 768px) {
+  .ttt-board { width: min(100%, 520px); gap: 14px; padding: 16px; }
+}
 .ttt-cell { aspect-ratio: 1; border-radius: var(--radius-md); background: var(--stage-800); border: 1px solid var(--stage-600); display: grid; place-items: center; cursor: pointer; padding: 0; transition: border-color .15s, background .15s; }
 .ttt-cell:not(:disabled):hover { border-color: rgba(255,214,0,.5); background: var(--stage-700); }
 .ttt-cell:disabled { cursor: default; }
