@@ -3,6 +3,12 @@
   width: 100%; max-width: min(100%, 720px); margin-inline: auto;
   touch-action: none; user-select: none; -webkit-user-select: none;
 }
+@media (min-width: 1024px) and (orientation: landscape) {
+  .sopa-board {
+    width: min(100%, 70vh, 760px);
+    max-width: none;
+  }
+}
 .sopa-board.is-wrong { animation: sp-shake .35s; }
 .sopa-cell {
   aspect-ratio: 1; display: grid; place-items: center; border-radius: var(--radius-sm);

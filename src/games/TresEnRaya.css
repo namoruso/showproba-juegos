@@ -16,7 +16,7 @@
 .ttt-status.is-win { color: var(--gold-400); }
 .ttt-board {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(10px, 1.8vw, 16px);
-  padding: clamp(12px, 2vw, 18px); width: 100%; max-width: min(100%, 560px); margin-inline: auto;
+  padding: clamp(12px, 2vw, 18px); width: min(100%, 480px); margin-inline: auto;
   border-radius: var(--radius-lg); background: var(--stage-950); border: 1px solid var(--stage-600);
 }
 .ttt-cell {
@@ -30,3 +30,23 @@
 .ttt-o { stroke: var(--ink); stroke-width: 7; }
 .ttt-cell.is-win.is-X { background: var(--gold-tint); border: 2px solid var(--gold-400); box-shadow: var(--glow-gold); }
 .ttt-cell.is-win.is-O { background: rgba(255,90,95,.1); border: 2px solid var(--signal-error); }
+
+@media (min-width: 768px) {
+  .ttt-board { width: min(100%, 560px); }
+}
+
+/* Desktop: tablero grande según alto de ventana */
+@media (min-width: 1024px) and (orientation: landscape) {
+  .ttt-board {
+    width: min(100%, 58vh, 640px);
+    gap: 14px;
+    padding: 16px;
+    flex: 0 1 auto;
+  }
+  .ttt-players { margin-bottom: 10px; }
+  .ttt-status { margin: 4px 0 10px; }
+}
+
+@media (min-width: 1400px) and (orientation: landscape) {
+  .ttt-board { width: min(100%, 62vh, 720px); }
+}

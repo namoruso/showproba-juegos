@@ -1,4 +1,7 @@
 .pz-board { --g: clamp(6px, 1vw, 10px); position: relative; aspect-ratio: 3 / 2; width: 100%; margin-inline: auto; }
+@media (min-width: 1024px) and (orientation: landscape) {
+  .pz-board { width: min(100%, 78vh, 900px); }
+}
 .pz-tile, .pz-hole { position: absolute; width: calc((100% - 2 * var(--g)) / 3); height: calc((100% - var(--g)) / 2);
   left: calc(var(--c) * ((100% - 2 * var(--g)) / 3 + var(--g))); top: calc(var(--r) * ((100% - var(--g)) / 2 + var(--g))); }
 .pz-tile { padding: 0; overflow: hidden; border-radius: var(--radius-md); background: var(--navy-800); border: 0; cursor: pointer;

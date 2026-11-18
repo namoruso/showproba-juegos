@@ -33,3 +33,7 @@
 @media (min-width: 768px) {
   .rg-area { aspect-ratio: 16 / 10; }
 }
+@media (min-width: 1024px) and (orientation: landscape) {
+  .rg-ticket { max-width: min(100%, 820px); margin-inline: auto; }
+  .rg-area { aspect-ratio: 2 / 1; max-height: 48vh; }
+}

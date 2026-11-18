@@ -130,20 +130,39 @@
   }
 }
 
-/* Escritorio / tótem landscape: menú ancho, juegos cómodos al centro */
+/* Escritorio / tótem landscape: menú ancho; juegos usan más del monitor */
 @media (min-width: 1024px) and (orientation: landscape) {
   :root {
-    --sp-game-max: min(62vw, 860px);
+    --sp-game-max: min(78vw, 1040px);
     --sp-menu-max: min(96vw, 1360px);
-    --sp-logo: 64px;
+    --sp-pad-x: 36px;
+    --sp-pad-y-top: 12px;
+    --sp-pad-y-bot: 20px;
+    --sp-logo: 48px;
     --sp-logo-lg: 112px;
-    --sp-title: 42px;
+    --sp-topbar: 56px;
+    --sp-icon: 48px;
+    --sp-title: 34px;
+    --sp-kicker: 12px;
+    --sp-btn-h: 56px;
+    --sp-btn-fs: 15px;
+    --sp-chip-min: 112px;
+    --sp-chip-b: 26px;
+    --sp-chip-label: 11px;
+    --sp-body: 16px;
   }
 }
 
-@media (min-width: 1400px) and (orientation: landscape) {
+@media (min-width: 1280px) and (orientation: landscape) {
   :root {
-    --sp-game-max: min(55vw, 920px);
-    --sp-menu-max: min(96vw, 1440px);
+    --sp-game-max: min(72vw, 1120px);
+    --sp-menu-max: min(96vw, 1400px);
+  }
+}
+
+@media (min-width: 1600px) and (orientation: landscape) {
+  :root {
+    --sp-game-max: min(64vw, 1200px);
+    --sp-menu-max: min(96vw, 1480px);
   }
 }

@@ -28,3 +28,8 @@
 .jp-msg strong { display: block; margin-top: 6px; font: 700 clamp(18px, 3vw, 24px) var(--font-display); }
 .jp-miss { text-align: center; margin-top: 12px; font: 600 var(--sp-body) var(--font-body); color: var(--ink-muted); }
 .jp-pull { min-height: var(--sp-btn-h); font-size: var(--sp-btn-fs); }
+
+@media (min-width: 1024px) and (orientation: landscape) {
+  .jp-machine { max-width: min(100%, 720px); margin-inline: auto; }
+  .jp-reel span { height: clamp(70px, 12vh, 96px); }
+}

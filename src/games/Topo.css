@@ -54,3 +54,10 @@
 .tp-score.is-bad { color: var(--signal-error); text-shadow: none; }
 @keyframes tp-float { to { transform: translateY(-34px); opacity: 0; } }
 .tp-overlay { border-radius: var(--radius-lg); z-index: 5; }
+
+@media (min-width: 1024px) and (orientation: landscape) {
+  .tp-field {
+    width: min(100%, 70vh, 780px);
+    margin-inline: auto;
+  }
+}

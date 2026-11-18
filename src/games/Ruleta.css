@@ -40,5 +40,6 @@
   .rl-wheel { width: min(100%, 68vmin, 720px); }
 }
 @media (min-width: 1024px) and (orientation: landscape) {
-  .rl-wheel { width: min(100%, 58vmin, 560px); }
+  .rl-wheel { width: min(100%, 64vh, 620px); }
+  .rl-wrap { flex: 1 1 auto; }
 }

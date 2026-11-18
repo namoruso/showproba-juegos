@@ -28,6 +28,13 @@ button { font-family: inherit; color: inherit; }
 .sp-screen > .sp-actions { margin-top: auto; padding-top: clamp(16px, 2.5vh, 28px); flex: none; }
 .sp-play > .sp-hud { flex: none; }
 
+/* Desktop landscape: aprovecha alto/ancho, sin “móvil flotante” */
+@media (min-width: 1024px) and (orientation: landscape) {
+  .sp-play { justify-content: flex-start; gap: 14px; }
+  .sp-screen:not(.mn) .sp-head { margin: 8px 0 12px; }
+  .sp-screen:not(.mn) .sp-hud { margin-bottom: 12px; }
+}
+
 /* ---------- Menú ---------- */
 .mn {
   max-width: var(--sp-menu-max);
