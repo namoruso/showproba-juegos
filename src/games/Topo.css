@@ -1,0 +1,31 @@
+.tp-goal { margin-top: -4px; }
+.tp-field { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 10px; padding: 18px 12px 14px; border-radius: var(--radius-lg);
+  background: radial-gradient(90% 60% at 50% 0%, rgba(255,193,0,.08), transparent 70%), linear-gradient(180deg, var(--navy-900), var(--stage-950)); border: 1px solid var(--stage-600); }
+.tp-hole { position: relative; aspect-ratio: 1 / 1.05; padding: 0; border: 0; background: none; cursor: pointer; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+.tp-pit { position: absolute; left: 6%; right: 6%; bottom: 6%; height: 30%; border-radius: 50%; background: radial-gradient(closest-side, #000, var(--stage-950) 70%, var(--stage-800)); }
+.tp-rim { position: absolute; left: 2%; right: 2%; bottom: 0; height: 22%; border-radius: 0 0 50% 50% / 0 0 100% 100%; background: var(--stage-700); border-top: 2px solid var(--stage-600); z-index: 2; }
+.tp-pop-wrap { position: absolute; left: 6%; right: 6%; bottom: 12%; top: 0; overflow: hidden; z-index: 1; border-radius: 0 0 40% 40%; }
+.tp-char { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; transform: translateY(100%); animation: tp-up .14s ease-out forwards; }
+.tp-hole.is-hit .tp-char { animation: tp-bonk .26s ease-in forwards; }
+@keyframes tp-up { to { transform: translateY(2%); } }
+@keyframes tp-bonk { 0% { transform: translateY(2%) scale(1.06, .9); } 100% { transform: translateY(100%); } }
+.tp-body { fill: var(--navy-600); stroke: var(--gold-500); stroke-width: 2; }
+.tp-belly { fill: var(--navy-800); }
+.tp-helmet { fill: var(--gold-500); }
+.tp-lamp { fill: var(--gold-300); filter: drop-shadow(0 0 6px var(--gold-400)); }
+.tp-eye { fill: var(--ink); }
+.tp-pupil { fill: var(--stage-950); }
+.tp-nose { fill: var(--gold-400); }
+.tp-xeyes { stroke: var(--ink); stroke-width: 4; stroke-linecap: round; fill: none; }
+.tp-char.is-gold .tp-body { fill: var(--gold-500); stroke: var(--gold-300); }
+.tp-char.is-gold .tp-belly { fill: var(--amber-500); }
+.tp-char.is-gold .tp-helmet { fill: var(--ink); }
+.tp-char.is-gold .tp-nose { fill: var(--gold-ink); }
+.tp-hole.is-gold .tp-pit { box-shadow: 0 0 22px rgba(255,214,0,.5); }
+.tp-bad-body { fill: var(--stage-700); stroke: var(--signal-error); stroke-width: 4; }
+.tp-bad-eyes { stroke: var(--signal-error); stroke-width: 4; stroke-linecap: round; fill: none; }
+.tp-bad-spark { stroke: var(--signal-error); stroke-width: 4; stroke-linecap: round; animation: sp-blink .3s infinite; }
+.tp-score { position: absolute; left: 50%; top: 0; z-index: 3; translate: -50% 0; font: 800 20px var(--font-display); color: var(--gold-400); text-shadow: 0 0 10px rgba(255,193,0,.6); pointer-events: none; animation: tp-float .65s ease-out forwards; }
+.tp-score.is-bad { color: var(--signal-error); text-shadow: none; }
+@keyframes tp-float { to { transform: translateY(-34px); opacity: 0; } }
+.tp-overlay { border-radius: var(--radius-lg); z-index: 5; }

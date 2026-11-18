@@ -1,0 +1,27 @@
+# Dependencias
+node_modules/
+
+# Build
+dist/
+dist-ssr/
+*.local
+
+# Logs / caché
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+.vite/
+.cache/
+
+# Entorno
+.env
+.env.*
+!.env.example
+
+# Editores
+.idea/
+.vscode/
+*.swp
+*.swo

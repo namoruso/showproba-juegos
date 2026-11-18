@@ -1,0 +1,10 @@
+.sopa-board { display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px; touch-action: none; user-select: none; -webkit-user-select: none; }
+.sopa-board.is-wrong { animation: sp-shake .35s; }
+.sopa-cell { aspect-ratio: 1; display: grid; place-items: center; border-radius: var(--radius-sm); font: 700 clamp(14px, 4vw, 18px) var(--font-display); color: var(--ink); transition: background .12s, color .12s; cursor: pointer; }
+.sopa-cell.is-found { background: linear-gradient(135deg, var(--gold-400), var(--amber-500)); color: var(--gold-ink); box-shadow: 0 0 12px rgba(255,193,0,.35); }
+.sopa-cell.is-sel { background: var(--navy-600); color: var(--ink); box-shadow: inset 0 0 0 2px var(--gold-400); }
+.sopa-hint { text-align: center; margin: 14px 0 12px; font: 500 13px var(--font-body); color: var(--ink-muted); min-height: 18px; }
+.sopa-hint b { color: var(--gold-400); font-family: var(--font-display); letter-spacing: 2px; }
+.sopa-words { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.sopa-word { display: inline-flex; align-items: center; gap: 5px; height: 32px; padding: 0 14px; border-radius: 99px; border: 1px solid var(--stage-600); background: var(--stage-800); font: 700 11px var(--font-display); letter-spacing: 1.5px; }
+.sopa-word.is-done { background: var(--gold-tint); border-color: rgba(255,214,0,.4); color: var(--gold-400); text-decoration: line-through; }

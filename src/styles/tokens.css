@@ -1,0 +1,38 @@
+/* ShowProba Juegos — tokens (generado desde el design system). No editar valores sueltos: cambiar aquí. */
+:root {
+  --stage-950: #0b0b0c;
+  --stage-900: #121212;
+  --stage-800: #1a1a1a;
+  --stage-700: #242424;
+  --stage-600: #343434;
+  --navy-900: #001a30;
+  --navy-800: #002441;
+  --navy-600: #0b3d6b;
+  --gold-300: #ffe066;
+  --gold-400: #ffd600;
+  --gold-500: #ffc100;
+  --amber-500: #ffaa00;
+  --gold-tint: #2e2a12;
+  --gold-ink: #1a1300;
+  --ink: #ffffff;
+  --ink-muted: #9ba2ae;
+  --signal-error: #ff5a5f;
+  --glow-gold: 0 0 0 1px rgba(255,214,0,0.35), 0 8px 28px rgba(255,170,0,0.35);
+  --glow-soft: 0 0 24px rgba(255,193,0,0.18);
+  --lift: 0 14px 36px rgba(0,0,0,0.55);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+  --font-display: "Unbounded", "Montserrat", system-ui, sans-serif;
+  --font-body: "Outfit", system-ui, sans-serif;
+}

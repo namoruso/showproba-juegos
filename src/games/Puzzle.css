@@ -1,0 +1,20 @@
+.pz-board { --g: 6px; position: relative; aspect-ratio: 3 / 2; }
+.pz-tile, .pz-hole { position: absolute; width: calc((100% - 2 * var(--g)) / 3); height: calc((100% - var(--g)) / 2);
+  left: calc(var(--c) * ((100% - 2 * var(--g)) / 3 + var(--g))); top: calc(var(--r) * ((100% - var(--g)) / 2 + var(--g))); }
+.pz-tile { padding: 0; overflow: hidden; border-radius: var(--radius-md); background: var(--navy-800); border: 0; cursor: pointer;
+  transition: left .18s ease, top .18s ease, border-color .2s; }
+.pz-tile::before { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; border: 1px solid rgba(255,214,0,.2); pointer-events: none; }
+.pz-tile.is-movable::before { border: 2px dashed rgba(255,214,0,.6); }
+.pz-tile.is-ok::after { z-index: 1; content: ""; position: absolute; right: 6px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold-400); box-shadow: 0 0 8px var(--gold-400); }
+.pz-hole { border-radius: var(--radius-md); border: 2px dashed var(--stage-600); }
+/* Imagen completa = tablero entero; cada pieza muestra su recorte. El logo mantiene su proporción. */
+.pz-art { position: absolute; width: calc(300% + 2 * var(--g)); height: calc(200% + var(--g));
+  left: calc(var(--pc) * (-100% - var(--g))); top: calc(var(--pr) * (-100% - var(--g))); display: grid; place-items: center; pointer-events: none; }
+.pz-logo.sp-logo { width: 88%; height: auto; margin: 0; }
+.pz-n { z-index: 1; position: absolute; left: 6px; top: 4px; font: 700 10px var(--font-display); color: rgba(255,255,255,.4); }
+.pz-board.is-solved .pz-tile { box-shadow: var(--glow-soft); }
+.pz-board.is-solved .pz-tile::before { border: 0; }
+.pz-board.is-solved .pz-n, .pz-board.is-solved .pz-tile::after { opacity: 0; }
+.pz-target { display: flex; align-items: center; gap: 12px; margin-top: 14px; font: 500 12px/16px var(--font-body); color: var(--ink-muted); }
+.pz-thumb { flex: none; width: 56px; height: 56px; border-radius: 12px; background: var(--navy-800); display: grid; place-items: center; border: 1px solid var(--stage-600); }
+.pz-thumb-logo.sp-logo { width: 42px; height: auto; }
